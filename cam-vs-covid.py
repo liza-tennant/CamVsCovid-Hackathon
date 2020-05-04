@@ -135,12 +135,38 @@ text_sentiments #array([0.5574, 0.4939, 0.1154])
 #abstract_sentiments = abstract_sentiments.reshape((12387,1))
 
 
+#### visualise wordclouds without LDA ####
+import numpy as np
+import pandas as pd
+from os import path
+from PIL import Image
+from wordcloud import WordCloud, STOPWORDS, ImageColorGenerator
+import matplotlib.pyplot as plt
+
+# text_data is our dataset of tweets
+
+#if I need to group them by policy 
+# policy = df.groupby("policy")
+
+# Create and generate a word cloud image:
+
+wordcloud1 = WordCloud(max_words=100, background_color="white").generate(text_data[0])
+wordcloud2 = WordCloud(max_words=100, background_color="white").generate(text_data[1])
+wordcloud3 = WordCloud(max_words=100, background_color="white").generate(text_data[2])
 
 
 
-##### CONTINUE FROM HERE ##########
+# Display the generated image:
+
+plt.figure()
+plt.imshow(wordcloud3, interpolation="bilinear")
+plt.axis("off")
+plt.savefig('wordcloud3')
+plt.show()
 
 
+
+######## for later - LDA for topic analysis of texts provided by users in free form #######
 from sklearn.decomposition import LatentDirichletAllocation
 lda = LatentDirichletAllocation(learning_method='online', n_components=10)
 lda_tfidf = lda.fit_transform(tfidf_scores)
@@ -171,8 +197,7 @@ for i,topic in lda_model.show_topics(formatted=True, num_topics=num_topics, num_
 
 
 
-
-#### wordcloud ####
+#### wordcloud of LDA topics ####
 # 1. Wordcloud of Top N words in each topic
 from matplotlib import pyplot as plt
 from wordcloud import WordCloud, STOPWORDS
