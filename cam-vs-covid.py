@@ -1,6 +1,6 @@
 # cam-vs-covid.py 
 """
-This code takes in text esponses for a single petition as a txt file, 
+This code takes in text responses for a single petition as a txt file, 
 cleans the text data and outputs a wordcloud and topic analysis. 
 
 """ 
